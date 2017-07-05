@@ -1,4 +1,4 @@
-(ns spec-coverage.core
+(ns sparkfund.boot-spec-coverage.core
   (:require [clojure.spec.test :as stest]
             [clojure.test :as test]
             [clojure.set :as set]))
@@ -7,7 +7,7 @@
 
 (def spec-used (atom #{}))
 
-(def no-coverage-kw ::no-coverage)
+(def no-coverage-kw :spark/no-boot-spec-coverage)
 
 (defn wrap-usage-check [vsym]
   {:pre [(symbol? vsym)]}
@@ -28,7 +28,7 @@
       (throw (ex-info
                (apply str "Please write tests for these specs: \n - "
                       (interpose "\n - " (sort (map str uncalled))))
-               {})))))
+               {::uncalled uncalled})))))
 
 (defn to-instrument [nss]
   (into #{}
@@ -44,47 +44,47 @@
         nss))
 
 (defn instrument [checks instrument-fn]
-  (let [_ (run! wrap-usage-check checks)
+  (let [instrument-fn (or instrument-fn stest/instrument)
+        _ (run! wrap-usage-check checks)
         instrumented (set (instrument-fn checks))
         _ (assert (= checks instrumented))]
-    (prn "instrumented" instrumented)
+    ;(prn "instrumented" instrumented)
     instrumented))
 
 (defn check-coverage [ns test-ns]
   {:pre [(coll? ns)]}
-  (let [instrumented (instrument (to-instrument ns))
+  (let [instrumented (instrument (to-instrument ns) nil)
         _ (require test-ns)]
     (test/run-tests test-ns)
     (summarize-results instrumented)))
 
 (defn pre-startup [cover-ns instrument-fn]
-  (prn "pre-startup")
+  ;(prn "pre-startup")
   (spit cover-ns-file
         (binding [*print-dup* true]
           (pr-str {:cover-ns cover-ns
                    :instrument-fn instrument-fn}))))
 
 (defn startup []
-  (prn "startup")
+  ;(prn "startup")
   (let [{:keys [cover-ns instrument-fn]} (read-string (slurp cover-ns-file))
         _ (assert (or (nil? instrument-fn) ((every-pred symbol? namespace) instrument-fn)))
         _ (assert (every? symbol? cover-ns))
-        instrument-fn (or (when instrument-fn
-                            (resolve instrument-fn))
-                          stest/instrument)
+        instrument-fn (when instrument-fn
+                        (resolve instrument-fn))
         _ (run! require cover-ns)
         _ (instrument (to-instrument cover-ns) instrument-fn)]
-    (prn "end startup")
+    ;(prn "end startup")
     nil))
 
 (defn shutdown []
-  (prn "shutdown")
+  ;(prn "shutdown")
   (summarize-results (to-instrument (:cover-ns (read-string (slurp cover-ns-file)))))
-  (prn "end shutdown")
+  ;(prn "end shutdown")
   nil)
 
 (comment
-  (require 'spec-coverage.coverage-test)
-  (check-coverage ['spec-coverage.coverage-test]
-                  'spec-coverage.coverage-test)
+  (require 'sparkfund.boot-spec-coverage.coverage-test)
+  (check-coverage ['sparkfund.boot-spec-coverage.coverage-test]
+                  'sparkfund.boot-spec-coverage.coverage-test)
   )

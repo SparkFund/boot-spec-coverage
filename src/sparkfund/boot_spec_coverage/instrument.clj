@@ -1,4 +1,4 @@
-(ns spec-coverage.instrument
+(ns sparkfund.boot-spec-coverage.instrument
   (:require [clojure.spec :as s]
             [clojure.spec.test :as stest]))
 

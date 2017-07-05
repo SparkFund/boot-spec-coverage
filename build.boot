@@ -1,5 +1,5 @@
 (task-options!
- pom {:project 'sparkfund/spec-coverage
+ pom {:project 'sparkfund/boot-spec-coverage
       :version "0.3.0-SNAPSHOT"
       :description "Boot plugin for clojure.spec coverage."}
  push {:repo-map {:url "https://clojars.org/repo/"}})
@@ -17,7 +17,7 @@
     :exclusions [org.clojure/clojure]]])
 
 (require '[adzerk.boot-jar2bin :refer :all]
-         '[adzerk.boot-test :refer :all]
+         '[adzerk.boot-test :as bt]
          '[boot-mvn.core :refer [mvn]]
          '[clojure.java.io :as io])
 
@@ -29,6 +29,16 @@
 (replace-task!
  [i install] (fn [& xs]
                (comp (pom) (jar) (apply i xs))))
+
+(deftask test
+  "Run every non-integration test."
+  []
+  (bt/test
+    :exclusions #{;; depends on boot.test
+                  'sparkfund.boot-spec-coverage
+                  ;; utility file for actual unit tests
+                  'sparkfund.boot-spec-coverage.coverage-test}))
+
 
 (deftask deploy
   []

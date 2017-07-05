@@ -1,6 +1,7 @@
-(ns spec-coverage.coverage-test
+;; don't run the tests in here, this file is used
+;; to test the boot tool via sparkfund.boot-spec-coverage.core-test
+(ns sparkfund.boot-spec-coverage.coverage-test
   (:require [clojure.test :refer :all]
-            [spec-coverage.core :as cover]
             [clojure.spec :as s]))
 
 (s/fdef foo1
@@ -25,5 +26,5 @@
 (s/fdef foo3
   :args (s/cat :i integer?)
   :ret integer?)
-(defn ^::cover/no-coverage foo3 [a]
+(defn ^:spark/no-boot-spec-coverage foo3 [a]
   a)

@@ -8,10 +8,13 @@ test suite.
 In boot, add the following to your build file.
 
 ```
-(require '[spec-coverage.boot :refer :all])`
+(require '[sparkfund.spec-coverage :refer :all])`
 ```
 
 Then `boot spec-coverage` will trigger the coverage checker.
+
+To opt-out of coverage per-var, attach `:spark/no-boot-spec-coverage`
+metadata to your var.
 
 ## License
 

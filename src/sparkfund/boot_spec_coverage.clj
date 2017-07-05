@@ -1,6 +1,6 @@
-(ns spec-coverage.boot
+(ns sparkfund.boot-spec-coverage
   (:refer-clojure :exclude [test])
-  (:require [spec-coverage.core :as cover]
+  (:require [sparkfund.boot-spec-coverage.core :as cover]
             [boot.core :as core]
             [clojure.java.io :as io]
             [clojure.tools.namespace.find :refer [find-namespaces-in-dir]]
