@@ -52,7 +52,7 @@
           instrument)
         fileset)
       (bt/test
-        :requires (into #{'spec-coverage.core} 
+        :requires (into #{'sparkfund.boot-spec-coverage.core} 
                         (concat requires 
                                 (when instrument
                                   (assert ((every-pred symbol? namespace) instrument))
