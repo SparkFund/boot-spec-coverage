@@ -1,5 +1,9 @@
 # boot-spec-coverage
 
+```
+[sparkfund/boot-spec-coverage "0.3.0"]
+```
+
 Check if your `clojure.spec` specs are actually exercised in your
 test suite.
 

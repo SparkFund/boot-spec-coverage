@@ -1,6 +1,6 @@
 (task-options!
  pom {:project 'sparkfund/boot-spec-coverage
-      :version "0.3.0-SNAPSHOT"
+      :version "0.3.0"
       :description "Boot plugin for clojure.spec coverage."}
  push {:repo-map {:url "https://clojars.org/repo/"}})
 
