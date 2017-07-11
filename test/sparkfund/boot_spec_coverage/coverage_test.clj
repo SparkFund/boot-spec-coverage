@@ -2,7 +2,7 @@
 ;; to test the boot tool via sparkfund.boot-spec-coverage.core-test
 (ns sparkfund.boot-spec-coverage.coverage-test
   (:require [clojure.test :refer :all]
-            [clojure.spec :as s]))
+            [clojure.spec.alpha :as s]))
 
 (s/fdef foo1
   :args (s/cat :i integer?)

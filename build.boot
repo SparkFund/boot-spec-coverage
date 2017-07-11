@@ -8,7 +8,8 @@
  :resource-paths #{"src"}
  :source-paths #{"test"}
  :dependencies
- '[[adzerk/boot-jar2bin "1.1.0" :scope "build"
+ '[[org.clojure/clojure "1.9.0-alpha17"]
+   [adzerk/boot-jar2bin "1.1.0" :scope "build"
     :exclusions [org.clojure/clojure]]
    [adzerk/boot-test "1.2.0"]
    [big-solutions/boot-mvn "0.1.5"

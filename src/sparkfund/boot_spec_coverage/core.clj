@@ -1,5 +1,5 @@
 (ns sparkfund.boot-spec-coverage.core
-  (:require [clojure.spec.test :as stest]
+  (:require [clojure.spec.test.alpha :as stest]
             [clojure.test :as test]
             [clojure.set :as set]))
 

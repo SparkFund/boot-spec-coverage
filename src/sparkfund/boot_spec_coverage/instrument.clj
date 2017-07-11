@@ -1,6 +1,6 @@
 (ns sparkfund.boot-spec-coverage.instrument
-  (:require [clojure.spec :as s]
-            [clojure.spec.test :as stest]))
+  (:require [clojure.spec.alpha :as s]
+            [clojure.spec.test.alpha :as stest]))
 
 (defn in-n-out-checking-fn
   [v f fn-spec]
@@ -53,7 +53,7 @@
 
 (defn in-n-outstrument
   "Instruments the function to check :arg, :ret and :fn specs when called.
-  Takes the same arguments as clojure.spec.test/instrument."
+  Takes the same arguments as clojure.spec.test.alpha/instrument."
   ([] (in-n-outstrument (stest/instrumentable-syms)))
   ([sym-or-syms] (in-n-outstrument sym-or-syms nil))
   ([sym-or-syms opts]
@@ -75,7 +75,7 @@
       (stest/unstrument instrumented))))
 
 (defn instrument-namespaces-fixture
-  "Fixture to clojure.spec.test/instrument all functions in the given namespaces"
+  "Fixture to clojure.spec.test.alpha/instrument all functions in the given namespaces"
   [namespaces]
   (fn [f]
     (let [instrumented (stest/instrument (mapcat stest/enumerate-namespace namespaces))]

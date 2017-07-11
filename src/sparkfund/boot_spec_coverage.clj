@@ -27,7 +27,7 @@
   the target to be synced even when there are test errors or failures.
 
   The --cover-ns option specifies Clojure namespaces that will be checked for
-  clojure.spec coverage during unit testing."
+  clojure.spec.alpha coverage during unit testing."
   [c clojure    VERSION   str    "the version of Clojure for testing."
    n namespaces NAMESPACE #{sym} "The set of namespace symbols to run tests in."
    e exclusions NAMESPACE #{sym} "The set of namespace symbols to be excluded from test."
@@ -39,7 +39,7 @@
    S startup    FN        #{sym} "functions to be called at pod startup"
    j junit-output-to JUNITOUT str "The directory where a junit formatted report will be generated for each ns"
    C cover-ns		COVERAGE #{sym} "The set of namespace symbols to run coverage checking on"
-   i instrument	FN sym "The function to instrument vars (default: clojure.spec.test/instrument). Its namespace will be required before resolution."
+   i instrument	FN sym "The function to instrument vars (default: clojure.spec.test.alpha/instrument). Its namespace will be required before resolution."
    ]
   (let []
     (comp
