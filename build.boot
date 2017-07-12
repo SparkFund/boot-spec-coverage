@@ -1,6 +1,8 @@
+(def version "0.4.0")
+
 (task-options!
  pom {:project 'sparkfund/boot-spec-coverage
-      :version "0.3.1-SNAPSHOT"
+      :version version
       :description "Boot plugin for clojure.spec coverage."}
  push {:repo-map {:url "https://clojars.org/repo/"}})
 
@@ -9,6 +11,7 @@
  :source-paths #{"test"}
  :dependencies
  '[[org.clojure/clojure "1.9.0-alpha17"]
+   [adzerk/bootlaces "0.1.13" :scope "build"]
    [adzerk/boot-jar2bin "1.1.0" :scope "build"
     :exclusions [org.clojure/clojure]]
    [adzerk/boot-test "1.2.0"]
@@ -40,7 +43,11 @@
                   ;; utility file for actual unit tests
                   'sparkfund.boot-spec-coverage.coverage-test}))
 
+(require '[adzerk.bootlaces :refer :all])
 
-(deftask deploy
+(bootlaces! version)
+
+(deftask release
   []
-  (comp (pom) (jar) (push)))
+  (comp (build-jar) (push-release)))
+

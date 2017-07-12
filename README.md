@@ -1,10 +1,10 @@
 # boot-spec-coverage
 
 ```
-[sparkfund/boot-spec-coverage "0.3.0"]
+[sparkfund/boot-spec-coverage "0.4.0"]
 ```
 
-Check if your `clojure.spec` specs are actually exercised in your
+Check if your `clojure.spec.alpha` specs are actually exercised in your
 test suite.
 
 ## Usage
