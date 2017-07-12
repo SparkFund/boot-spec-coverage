@@ -1,4 +1,4 @@
-(def version "0.4.0")
+(def version "0.5.0-SNAPSHOT")
 
 (task-options!
  pom {:project 'sparkfund/boot-spec-coverage
